@@ -1,20 +1,10 @@
 function solution(s) {
-  const map = {
-    zero: "0",
-    one: "1",
-    two: "2",
-    three: "3",
-    four: "4",
-    five: "5",
-    six: "6",
-    seven: "7",
-    eight: "8",
-    nine: "9",
-  };
-
-  for (const [word, digit] of Object.entries(map)) {
-    s = s.replaceAll(word, digit);
-  }
-
-  return Number(s);
+    var answer = 0;
+    const words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    
+    for(var i = 0; i<words.length; i++){
+        s = s.replaceAll(words[i], i)
+    }
+    
+    return Number(s);
 }
