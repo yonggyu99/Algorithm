@@ -1,11 +1,17 @@
 function solution(food) {
-  let left = "";
-
-  for (let i = 1; i < food.length; i++) {
-    const count = Math.floor(food[i] / 2);
-    left += String(i).repeat(count);
-  }
-
-  const right = [...left].reverse().join("");
-  return left + "0" + right;
+    var answer = '';
+    var left = '';
+    var right = '';
+    
+    for(var i = 1; i < food.length; i++){
+        left += String(i).repeat(Math.floor(food[i]/2))
+    }
+    
+    for(var i = food.length-1; i > 0; i--){
+        right += String(i).repeat(Math.floor(food[i]/2))
+    }
+    
+    answer = left + '0' + right
+    
+    return answer;
 }
