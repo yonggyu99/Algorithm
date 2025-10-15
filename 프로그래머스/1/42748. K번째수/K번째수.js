@@ -1,9 +1,13 @@
 function solution(array, commands) {
-  return commands.map(([i, j, k]) => {
-    const sliced = array.slice(i - 1, j);
-
-    const sorted = sliced.sort((a, b) => a - b);
-
-    return sorted[k - 1];
-  });
+    var answer = [];
+    var second_answer = [];
+    var number = 0;
+    for(var i = 0; i<commands.length; i++){
+        second_answer = array.slice(commands[i][0]-1,commands[i][1])
+        second_answer.sort((a,b) => a-b)
+        number = second_answer[commands[i][2]-1];
+        answer.push(number)
+    }
+    
+    return answer;
 }
