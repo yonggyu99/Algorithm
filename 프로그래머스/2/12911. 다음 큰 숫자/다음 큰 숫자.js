@@ -1,13 +1,13 @@
 function solution(n) {
     var answer = 0;
-    var binary = n.toString(2).split('1').length - 1;
+    let binary = n.toString(2).split('1').length-1;
+    
     while(true){
         n++;
-        var nextBinary = n.toString(2).split('1').length - 1;
-        if(binary === nextBinary){
-            answer = nextBinary
-            return n
+        let binary_next = n.toString(2).split('1').length-1;
+        if(binary === binary_next){
+            return n;
         }
     }
-    return answer;
+    return n;
 }
