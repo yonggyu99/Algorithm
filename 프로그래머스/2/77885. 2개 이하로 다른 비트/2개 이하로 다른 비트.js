@@ -1,10 +1,14 @@
 function solution(numbers) {
-    return numbers.map(n => {
-        let x = BigInt(n);
-        if (x % 2n === 0n) return Number(x + 1n);
+    return numbers.map(x => {
+        if(x % 2 === 0){
+            return x + 1;
+        }
         
-        let lastZero = (~x & (x + 1n));
+        let bit = '0' + x.toString(2);
+        let idx = bit.lastIndexOf('01');
         
-        return Number(x + lastZero - (lastZero >> 1n));
-    });
+        let nextBit = bit.substring(0, idx) + '10' + bit.substring(idx+2);
+        
+        return parseInt(nextBit, 2);
+    })
 }
