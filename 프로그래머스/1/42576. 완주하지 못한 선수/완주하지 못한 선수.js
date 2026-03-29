@@ -1,20 +1,20 @@
 function solution(participant, completion) {
-    const counts = {};
+    var answer = '';
+    
+    let comHash = new Map();
     
     for(const name of participant){
-        if(counts[name]===undefined){
-            counts[name] = 1; 
-        }
-        else{counts[name] += 1}
+        comHash.set(name, (comHash.get(name) || 0) + 1);
     }
     
     for(const name of completion){
-        counts[name] -= 1;
+        comHash.set(name, (comHash.get(name) || 0) - 1);
     }
     
-    for(const name in counts){
-        if(counts[name] > 0){
-            return name;
+    for(const [name, count] of comHash){
+        if(count > 0){
+            return name
         }
     }
+    
 }
