@@ -1,7 +1,5 @@
 function solution(start_num, end_num) {
-    var answer = [];
-    for(let i = start_num; i <= end_num; i++){
-        answer.push(i);
-    }
+    let answer = Array.from({length : end_num - start_num + 1}, (_, index) => start_num + index);
+    
     return answer;
 }
