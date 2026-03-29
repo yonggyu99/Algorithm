@@ -1,5 +1,9 @@
 function solution(nums) {
-  const maxCanSelect = nums.length / 2;
-  const uniqueKinds = new Set(nums).size;
-  return Math.min(uniqueKinds, maxCanSelect);
+    let numsType = new Set();
+    let canGet = nums.length / 2;
+    
+    for(const type of nums){
+        numsType.add(type);
+    }
+    return Math.min(numsType.size, canGet);
 }
