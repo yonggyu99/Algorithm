@@ -1,12 +1,17 @@
 function solution(phone_book) {
-    phone_book.sort();
+    const numObj = {};
     
-    for(let i = 0; i < phone_book.length - 1; i++){
-        const cur = phone_book[i]
-        const next = phone_book[i+1]
-        
-        if(next.startsWith(cur)) return false;
+    for(const number of phone_book){
+        numObj[number] = true;
     }
     
+    for(const number of phone_book){
+        let prefix = "";
+        for(let i = 0; i < number.length - 1; i++){
+            prefix += number[i];
+            
+            if(numObj[prefix]) return false;
+        }
+    }
     return true;
 }
