@@ -1,20 +1,24 @@
 function solution(progresses, speeds) {
-    const q = progresses.map((p, i) => Math.ceil((100 - p) / speeds[i]));
+    var answer = [];
+    let completeDays = [];
     
-    const result = [];
-    let front = 0;
+    for(let i = 0; i < progresses.length; i++){
+        completeDays[i] = Math.ceil((100 - progresses[i]) / speeds[i]);
+    }
     
-    while(front < q.length){
-        const deployDay = q[front];
+    while(completeDays.length > 0){
+        const currDays = completeDays.shift();
         let count = 1;
-        front ++;
-    
-        while(front < q.length && q[front] <= deployDay){
+        
+        while(completeDays.length > 0 && currDays >= completeDays[0]){
             count++;
-            front++;
+            completeDays.shift();
         }
-    result.push(count);
+        
+        answer.push(count);
+        
+    }
     
-    }    
-    return result;
+    console.log(progresses)
+    return answer;
 }
