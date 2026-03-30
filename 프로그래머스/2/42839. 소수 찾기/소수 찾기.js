@@ -1,36 +1,34 @@
 function solution(numbers) {
-    const result = new Set();
-    const digits = numbers.split('');
-    let count = 0;
     
-    function getList(currentStr, remainingDigits){
-        if(currentStr.length > 0){
-            result.add(Number(currentStr));
+    const answer = new Set();
+    const nums = numbers.split('');
+    
+    function getAllNumbers(current, remaining){
+        if(current.length > 0){
+            answer.add(Number(current));
         }
         
-        for(let i = 0; i < remainingDigits.length; i++){
-            const nextRemaining = [
-                ...remainingDigits.slice(0, i),
-                ...remainingDigits.slice(i+1)
-            ];
-            
-            getList(currentStr + remainingDigits[i], nextRemaining);
+        for(let i = 0; i < remaining.length; i++){
+            getAllNumbers(
+            current + remaining[i],
+            remaining.filter((_, idx) => idx !== i)
+            );
         }
     }
+    getAllNumbers("", nums);
     
     function isPrime(num){
         if(num < 2) return false;
-        
-        for(let i = 2; i <= Math.sqrt(num); i++){
+        for(let i = 2; i<= Math.sqrt(num); i++){
             if(num % i === 0) return false;
         }
         return true;
     }
     
-    getList('', digits);
+    let count = 0;
     
-    result.forEach(num => {
+    for(const num of answer){
         if(isPrime(num)) count++;
-    })
+    }
     return count;
 }
