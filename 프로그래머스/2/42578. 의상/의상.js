@@ -1,15 +1,14 @@
 function solution(clothes) {
-    let type = {};
     let answer = 1;
+    let clothesType = {};
     
-    for(const [cloth, clothType] of clothes){
-        type[clothType] = (type[clothType] || 0) + 1;
+    for(const cloth of clothes){
+        clothesType[cloth[1]] = (clothesType[cloth[1]] || 0) + 1;
     }
     
-    for(const cloth in type){
-        answer *= (type[cloth] + 1)
+    for(const type in clothesType){
+       answer *= (clothesType[type] + 1) 
     }
     
-    console.log(type)
     return answer - 1;
 }
