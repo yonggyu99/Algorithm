@@ -1,14 +1,16 @@
 function solution(s){
-    var count = 0;
+    let answer = true;
+    let stack = [];
     
-    for(ch of s){
-        if(ch === '('){
-            count ++;
-        }else count --;
-        
-        if (count <0) return false;
+    for(const ch of s){
+        stack.push(ch);
+        if(stack[stack.length - 1] === ")" && stack[stack.length - 2] === "("){
+            stack.pop();
+            stack.pop();
+        }
     }
     
-
-    return count === 0;
+    if(stack.length > 0) return false;
+    
+    return answer;
 }
