@@ -1,9 +1,14 @@
 function solution(nums) {
-    let numsType = new Set();
-    let canGet = nums.length / 2;
+    var answer = 0;
+    
+    const canGet = nums.length / 2;
+    let numsType = {};
     
     for(const type of nums){
-        numsType.add(type);
+        numsType[type] = (numsType[type] || 0) + 1;
     }
-    return Math.min(numsType.size, canGet);
+    
+    const length = Object.keys(numsType).length;
+    
+    return canGet > length ? length : canGet;
 }
