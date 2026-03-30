@@ -1,21 +1,25 @@
 function solution(bridge_length, weight, truck_weights) {
-    let time = 0;
-    let bridge = new Array(bridge_length).fill(0);
-    let bridgeWeight = 0;
+    var answer = 0;
     
-    while(truck_weights.length > 0){
+    let bridge = Array(bridge_length).fill(0);
+    let time = 0;
+    let currWeight = 0;
+    
+    while(truck_weights.length > 0 || currWeight > 0){
         time++;
         
-        let out = bridge.shift();
-        bridgeWeight -= out;
+        let finished = bridge.shift();
+        currWeight -= finished;
         
-        if(bridgeWeight + truck_weights[0] <= weight){
-            let In = truck_weights.shift();
-            bridge.push(In);
-            bridgeWeight += In;
-        }else{
-            bridge.push(0);
+        if(truck_weights.length > 0){
+            if(currWeight + truck_weights[0] <= weight){
+                let nextTruck = truck_weights.shift();
+                bridge.push(nextTruck);
+                currWeight += nextTruck;
+            }else{
+                bridge.push(0)
+            }
         }
     }
-    return time + bridge_length;
+    return time;
 }
