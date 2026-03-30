@@ -1,9 +1,14 @@
 function solution(numbers) {
-    const strings = numbers.map(num => num.toString());
+    var answer = '';
+    let stringNum = [];
     
-    strings.sort((a, b) => (b+a) - (a+b));
+    for(let i = 0; i < numbers.length; i++){
+        stringNum.push(numbers[i].toString());
+    }
     
-    const answer = strings.join('');
+    stringNum.sort((a,b) => { return (b+a) - (a+b)})
     
-    return answer[0] === '0' ? '0' : answer;
+    answer = stringNum.reduce((result, curr) => result += curr)
+    
+    return answer[0] === "0" ? "0" : answer;
 }
