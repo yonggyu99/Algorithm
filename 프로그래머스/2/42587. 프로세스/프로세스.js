@@ -1,17 +1,27 @@
 function solution(priorities, location) {
-    const queue = priorities.map((p, idx) => ({ p, idx}));
-    let order = 0;
+    var answer = 0;
     
-    while (queue.length > 0){
-        const cur = queue.shift();
+    let queue = priorities.map((priority, index) =>  ({index : index, priority : priority}))
+    
+    while(queue.length > 0){
+        let current = queue.shift();
+        let hasHigher = false;
         
-        const maxP = Math.max(...queue.map(x=> x.p), cur.p);
-        
-        if(cur.p < maxP){
-            queue.push(cur);
-        }else{
-            order++;
-            if(cur.idx === location) return order;
+        for(let i = 0; i < queue.length; i++){
+            if(queue[i].priority > current.priority){
+                hasHigher = true;
+                break;
+            }
         }
+        
+        if(hasHigher){
+            queue.push(current);
+        }else{
+            answer++
+            if(current.index === location) return answer
+        }
+        
+        
     }
+
 }
