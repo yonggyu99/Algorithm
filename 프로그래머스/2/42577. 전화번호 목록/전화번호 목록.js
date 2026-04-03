@@ -1,18 +1,21 @@
 function solution(phone_book) {
+    var answer = true;
+    const hasPhone = new Set();
     
-    let phoneNumber = {};
-    
-    for(const phone of phone_book){
-        phoneNumber[phone] = true;
+    for(const number of phone_book){
+        hasPhone.add(number);
     }
     
-    for(const number in phoneNumber){
+    for(const number of phone_book){
         let prefix = "";
+        
         for(let i = 0; i < number.length - 1; i++){
             prefix += number[i];
             
-            if(phoneNumber[prefix]) return false;
+            if(hasPhone.has(prefix)) return false;
         }
     }
+    
+    
     return true;
 }
