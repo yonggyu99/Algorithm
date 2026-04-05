@@ -1,24 +1,26 @@
 function solution(progresses, speeds) {
     var answer = [];
-    let completeDays = [];
+    
+    let remainDays = [];
+    const stack = [];
     
     for(let i = 0; i < progresses.length; i++){
-        completeDays[i] = Math.ceil((100 - progresses[i]) / speeds[i]);
-    }
+        let remainDay = Math.ceil((100 - progresses[i]) / speeds[i]);
+        remainDays.push(remainDay);
+    };
     
-    while(completeDays.length > 0){
-        const currDays = completeDays.shift();
+    console.log(remainDays);
+    while(remainDays.length > 0){
         let count = 1;
-        
-        while(completeDays.length > 0 && currDays >= completeDays[0]){
-            count++;
-            completeDays.shift();
+        let curr = remainDays.shift();
+        while(remainDays.length >0 && remainDays[0] <= curr){
+            remainDays.shift();
+            count ++;
         }
         
         answer.push(count);
-        
     }
     
-    console.log(progresses)
+    
     return answer;
 }
