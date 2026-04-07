@@ -1,14 +1,13 @@
 function solution(numbers) {
-    var answer = '';
-    let stringNum = [];
+    let answer = '';
+    const stringArr = [];
     
-    for(let i = 0; i < numbers.length; i++){
-        stringNum.push(numbers[i].toString());
+    for(const number of numbers){
+        stringArr.push(number.toString());
     }
     
-    stringNum.sort((a,b) => { return (b+a) - (a+b)})
+    answer = stringArr.sort((a, b) => (b + a) - (a + b)).reduce((result, curr) => result += curr);
     
-    answer = stringNum.reduce((result, curr) => result += curr)
-    
+    console.log(stringArr)
     return answer[0] === "0" ? "0" : answer;
 }
