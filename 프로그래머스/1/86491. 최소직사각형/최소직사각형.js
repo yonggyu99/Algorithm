@@ -1,16 +1,17 @@
 function solution(sizes) {
-    let maxWidth = 0;
-    let maxHeight = 0;
+    var answer = 0;
     
-    for(const [w, h] of sizes){
-        const a = Math.max(w, h);
-        const b = Math.min(w, h);
-        
-        if(a > maxWidth) maxWidth = a;
-        if(b > maxHeight) maxHeight = b;
+    let maxW = 0;
+    let maxH = 0;
+    
+    for(const card of sizes){
+        card.sort((a, b) => b - a);
     }
     
+    for(let i = 0; i < sizes.length; i++){
+        if(maxW < sizes[i][0]) maxW = sizes[i][0];
+        if(maxH < sizes[i][1]) maxH = sizes[i][1];
+    }
     
-    
-    return maxHeight * maxWidth;
+    return maxW * maxH;
 }
