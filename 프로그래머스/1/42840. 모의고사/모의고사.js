@@ -1,27 +1,21 @@
 function solution(answers) {
-    const answer = [];
+    var answer = [];
     
-    const patterns = [
-        [1, 2, 3, 4, 5],
-        [2, 1, 2, 3, 2, 4, 2, 5],
-        [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    ];
-
-    const scores = [0, 0, 0];
-
-    for (let i = 0; i < answers.length; i++) {
-        if (answers[i] === patterns[0][i % patterns[0].length]) scores[0]++;
-        if (answers[i] === patterns[1][i % patterns[1].length]) scores[1]++;
-        if (answers[i] === patterns[2][i % patterns[2].length]) scores[2]++;
-    }
-
-    const maxScore = Math.max(...scores);
-
-    for (let j = 0; j < scores.length; j++) {
-        if (scores[j] === maxScore) {
-            answer.push(j + 1);
+    const peopleList = [[1, 2, 3, 4, 5], [2, 1, 2, 3, 2, 4, 2, 5], [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]];
+    const correct = [0, 0, 0];
+    
+    
+    for(const people of peopleList){
+        for(let i = 0; i < answers.length; i++){
+            if(people[i % people.length] === answers[i]) correct[peopleList.indexOf(people)]++; 
         }
     }
-
+    
+    const maxScore = Math.max(...correct);
+    
+    for(let i = 0; i < correct.length; i++){
+        if(correct[i] === maxScore) answer.push(i + 1);
+    }
+    
     return answer;
 }
