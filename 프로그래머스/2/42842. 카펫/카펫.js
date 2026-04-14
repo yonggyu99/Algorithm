@@ -1,14 +1,14 @@
 function solution(brown, yellow) {
-    var answer = [];
-    let total = brown + yellow;
-    
-    for(let height = 3; height <= total / height; height ++ ){
-        let width = total/height;
-        
-        if(Number.isInteger(width)){
-            if((height-2)*(width-2) === yellow){
-                return [width, height]
+    const total = brown + yellow
+
+    for(let h = 3; h <= Math.sqrt(total); h++){
+        if(total % h  === 0){
+            let w = total / h;
+            
+            if((w - 2) * (h - 2) === yellow){
+                return [w, h];
             }
         }
     }
+
 }
