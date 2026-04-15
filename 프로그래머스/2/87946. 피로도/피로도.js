@@ -1,27 +1,24 @@
 function solution(k, dungeons) {
-  let answer = 0;
-  const n = dungeons.length;
-  const visited = new Array(n).fill(false);
-
-
-  function dfs(currentFatigue, count) {
-
-    if (count > answer) {
-      answer = count;
+    var answer = -1;
+    const visited = new Array(dungeons.length).fill(false);
+    
+    function dfs(remainCost, count){
+        
+        if(answer < count) answer = count;
+        
+        for(let i = 0; i < dungeons.length; i++){
+            if(visited[i]) continue;
+            if(dungeons[i][0] > remainCost) continue;
+            
+            visited[i] = true;
+            dfs(remainCost - dungeons[i][1], count + 1);
+            visited[i] = false;
+        }
+        
+        
     }
-
-    for (let i = 0; i < n; i++) {
-      const [need, cost] = dungeons[i];
-
-      if (visited[i]) continue;
-      if (currentFatigue < need) continue;
-
-      visited[i] = true;
-      dfs(currentFatigue - cost, count + 1);
-      visited[i] = false;
-    }
-  }
-
-  dfs(k, 0);
-  return answer;
+    
+    dfs(k, 0);
+    
+    return answer;
 }
