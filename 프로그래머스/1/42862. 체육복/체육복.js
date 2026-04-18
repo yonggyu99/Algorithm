@@ -1,20 +1,24 @@
 function solution(n, lost, reserve) {
-    const realLost = lost.filter(l => !reserve.includes(l));
-    const realReserved = reserve.filter(r => !lost.includes(r));
     
-    realLost.sort((a, b) => a - b);
-    let reserved = new Set(realReserved);
-    let answer = 0;
-    
-    for(let i = 0; i < realLost.length; i++){
-        if(reserved.has(realLost[i] - 1)){
-            answer ++;
-            reserved.delete(realLost[i] - 1)
+    let realLost = lost.filter(l => !reserve.includes(l)).sort((a, b) => a - b);
+    let realReserve = reserve.filter(r => !lost.includes(r)).sort((a, b) => a - b);
+
+    const finalLost = realLost.filter(l => {
+
+        const borrowFromFront = realReserve.find(r => r === l - 1);
+        if (borrowFromFront) {
+            realReserve = realReserve.filter(r => r !== borrowFromFront);
+            return false;
         }
-        else if(reserved.has(realLost[i] + 1)){
-            answer ++;
-            reserved.delete(realLost[i] + 1)
+
+        const borrowFromBack = realReserve.find(r => r === l + 1);
+        if (borrowFromBack) {
+            realReserve = realReserve.filter(r => r !== borrowFromBack);
+            return false;
         }
-    }
-    return n - realLost.length + answer;
+
+        return true;
+    });
+
+    return n - finalLost.length;
 }
