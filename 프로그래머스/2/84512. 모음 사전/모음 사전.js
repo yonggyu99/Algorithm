@@ -1,11 +1,26 @@
 function solution(word) {
-    let answer = 0;
-    let alpah = ['A', 'E', 'I', 'O', 'U'];
-    let weight = [781, 156, 31, 6, 1]
+    var answer = 0;
+    const dic = ["A", "E", "I", "O", "U"];
+    let count = 0;
     
-    for(let i = 0 ; i < word.length; i++){
-        let index = alpah.indexOf(word[i]);
-        answer += index * weight[i] + 1;
+    function dfs(current){
+        if(current === word){
+            answer = count;
+            return;
+        }
+        
+        if(current.length >= 5) return;
+        
+        for(let i = 0; i < dic.length; i++){
+            if(answer > 0) return;
+            
+            count++;
+            
+            dfs(current + dic[i]);
+        }
     }
+    
+    dfs("")
+    
     return answer;
 }
