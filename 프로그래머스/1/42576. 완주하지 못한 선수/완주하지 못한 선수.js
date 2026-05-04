@@ -1,18 +1,22 @@
 function solution(participant, completion) {
+    let answer = '';
+    const name = {};
     
-    let comHash = {};
-    
-    for(let name of participant){
-        comHash[name] = (comHash[name] || 0) + 1;
+    for(const people of participant){
+        name[people] = (name[people] || 0)  + 1;
     }
-    
-    for(let name of completion){
-        comHash[name] = (comHash[name] || 0) - 1;
-    }
-    
-    for(const name in comHash){
-        if(comHash[name] > 0) return name;
-    }
-    
 
+    
+    for(const complete of completion){
+        if(name[complete] > 0){
+            name[complete] -= 1;
+        }
+    }
+    
+    for(const remain in name){
+        if(name[remain] > 0){
+            answer += remain
+        }
+    }
+    return answer;
 }
