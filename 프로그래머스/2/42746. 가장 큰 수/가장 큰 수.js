@@ -7,7 +7,5 @@ function solution(numbers) {
     }
     
     answer = stringArr.sort((a, b) => (b + a) - (a + b)).reduce((result, curr) => result += curr);
-    
-    console.log(stringArr)
     return answer[0] === "0" ? "0" : answer;
 }
